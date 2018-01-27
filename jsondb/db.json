@@ -1,11 +1,6 @@
 {
   "stocks": [
     {
-      "code": "FORD",
-      "name": "Ford Motors Company",
-      "id": 3
-    },
-    {
       "code": "HWPK",
       "name": "Hewlett Packard Inc.",
       "id": 6

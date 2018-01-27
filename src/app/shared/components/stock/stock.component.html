@@ -14,7 +14,8 @@
       <td [ngClass]="{myClass: isMyclass, centerClass: isCenter}">{{stock.name}}</td>
       <td>
         <button class="btn btn-warning" data-toggle="modal" data-target="#updateStock"
-                (click)="selectStock(stock)">Edit</button>
+                (click)="selectStock(stock)">Edit
+        </button>
       </td>
       <td>
         <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete"
@@ -68,8 +69,12 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label">Code</label>
             <div class="col-md-9"><input type="text" name="code" [(ngModel)]="selectedStock.code"
-                                    #stockCode  required class="form-control">
+                                         #stockCode="ngModel" required class="form-control">
             </div>
+          </div>
+          <div class="row" *ngIf="stockCode.touched && !stockCode.valid">
+            <div class="col-md-3"></div>
+            <label class="col-md-9 alert alert-danger col-form-label">Stock code is required</label>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label">Stock Name</label>
