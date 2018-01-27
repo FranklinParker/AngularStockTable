@@ -1,0 +1,122 @@
+<div class="m-x-auto p-a-2" style="width:900px">
+  <table class="table " *ngIf="showUpdate">
+    <thead>
+    <tr colspan="5" rowspan="2" class="text-lg-left"><h2>Update Stock</h2></tr>
+    <tr style="background: lightgrey">
+      <th><label >Code</label></th>
+      <th><input type="text" name="code"  [(ngModel)]="selectedStock.code" class="m-1"></th>
+      <th><label for="name">Stock Name</label></th>
+      <th><input type="text" name="name" [(ngModel)]="selectedStock.name" class="m-1"></th>
+      <th >
+        <button class="btn btn-warning"  type="button" (click)="updateStock()">Update</button>
+      </th>
+    </tr>
+    </thead>
+
+
+  </table>
+
+  <table class="table table-striped table-inverse table-hover">
+    <thead>
+    <th>Stock Code</th>
+    <th>Company</th>
+    <th>Edit</th>
+    <th>Delete</th>
+
+
+    </thead>
+    <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td [ngClass]="{myClass: isMyclass, centerClass: isCenter}">{{stock.code}}</td>
+      <td [ngClass]="{myClass: isMyclass, centerClass: isCenter}">{{stock.name}}</td>
+      <td>  <button class="btn btn-warning" (click)="selectStock(stock)">Edit</button></td>
+      <td>  <button class="btn btn-danger"  data-toggle="modal" data-target="#confirmDelete"
+                    (click)="setDeleteId(stock.id)">Delete</button></td>
+
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<table class="table">
+  <thead>
+  <tr colspan="5" rowspan="2" class="text-lg-left"><h2>Add New Stock</h2></tr>
+  <tr style="background: lavender">
+    <th><label for="code">Code</label></th>
+    <th><input type="text" name="code" id="code" [(ngModel)]="newStock.code" class="m-1"></th>
+    <th><label for="name">Stock Name</label></th>
+    <th><input type="text" id="name" name="name" [(ngModel)]="newStock.name" class="m-1"></th>
+    <th >
+      <button class="btn btn-primary" data-toggle="modal" data-target="#confirmSaveNew" type="button">Save New Stock</button>
+    </th>
+  </tr>
+  </thead>
+
+
+</table>
+
+
+<!-- Modal Confirm delete -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteTitle">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirm Delete
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStock()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Modal Confirm delete -->
+
+<!-- Modal Confirm save -->
+<div class="modal fade" id="confirmSaveNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Save New</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirm Save
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveNewStock()">Save Stock</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Modal Confirm save -->
+
+<div class="container-fluid" [ngSwitch]="stockExchange">
+  <div *ngSwitchCase="'NYSE'">New York Stock Exchange</div>
+  <div *ngSwitchCase="'LSE'">London Exchange</div>
+  <div *ngSwitchDefault>No Stock exchange found</div>
+</div>
+
+<div class="container-fluid">
+  <div class="form-group"><label for="show">Show/hide</label>
+    <input type="checkbox" id="show" name="show" [(ngModel)]="show" class="form-control">
+  </div>
+</div>
+<div class="container-fluid" *ngIf="show else doNotShow">
+  show
+</div>
+<ng-template #doNotShow>
+  <div class="container-fluid" appHighlight> do not show</div>
+</ng-template>
+

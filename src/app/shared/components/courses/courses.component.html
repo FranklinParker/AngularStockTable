@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th appHighlight>Class Name</th>
+    <th>Professor</th>
+    <th>Schedule</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="courses">
+  <tr *ngFor="let course of courses">
+    <td>{{course.courseName}}</td>
+    <td>{{course.professor}}</td>
+    <td>{{course.classSchedule}}</td>
+  </tr>
+  </tbody>
+
+</table>
