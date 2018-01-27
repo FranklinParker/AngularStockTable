@@ -81,16 +81,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label for="code">Code</label>
-          <input type="text" name="code" id="code" [(ngModel)]="newStock.code" class="form-control">
-        </div>
-        <div class="form-group"><label for="name">Stock Name</label>
-          <input type="text" id="name" name="name" [(ngModel)]="newStock.name" class="form-control"></div>
+        <form #stockForm="ngForm">
+          <div class="form-group">
+            <label for="code">Code</label>
+            <input type="text" name="code" id="code" [(ngModel)]="newStock.code"
+                 required  class="form-control">
+          </div>
+          <div class="form-group"><label for="name">Stock Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="newStock.name"
+                   required class="form-control">
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+          <button type="button" class="btn btn-primary" type="submit"
+                  (click)="saveNewStock()" data-dismiss="modal" [disabled]="!stockForm.valid">Save Stock
+          </button>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveNewStock()">Save Stock</button>
+
       </div>
     </div>
   </div>
